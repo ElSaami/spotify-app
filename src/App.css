@@ -1,0 +1,333 @@
+body, html {
+  margin: 0;
+  padding: 0;
+  font-family: Arial, sans-serif;
+  height: 100%;
+}
+
+.App {
+  display: grid;
+  grid-template-columns: 250px 1fr 250px;
+  grid-template-rows: auto 1fr auto;
+  grid-template-areas:
+    "sidebar main-view song-info"
+    "playlists main-view song-info"
+    "player player player";
+  height: 100vh;
+}
+
+.sidebar {
+  grid-area: sidebar;
+  background-color: #181818;
+  color: white;
+  padding: 20px;
+}
+
+.sidebar ul {
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+}
+
+.sidebar-item {
+  display: flex;
+  align-items: center;
+  margin-bottom: 20px;
+  cursor: pointer;
+  transition: color 0.3s ease;
+}
+
+.sidebar-item span {
+  margin-left: 10px;
+}
+
+.sidebar-item:hover {
+  color: #1db954; /* Cambia el color de texto al hacer hover */
+}
+
+.sidebar-item svg {
+  font-size: 20px;
+}
+
+.playlists {
+  grid-area: playlists;
+  background-color: #282828;
+  color: white;
+  padding: 20px;
+  height: 100%;
+  overflow-y: auto; /* Agregamos overflow-y para el scroll vertical */
+  max-height: calc(100vh - 50px); /* Ajustamos la altura máxima para incluir el padding */
+}
+
+.playlists ul {
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+}
+
+.playlists li {
+  display: flex;
+  align-items: center;
+  margin-bottom: 10px;
+  padding: 10px 10px 10px 20px; /* Aumentamos el padding a la izquierda */
+  border-radius: 4px;
+  transition: background-color 0.3s ease, transform 0.3s ease;
+  cursor: pointer;
+}
+
+.playlists li:hover {
+  background-color: #3a3a3a; /* Cambia el color de hover a un gris más acorde */
+  transform: scale(1.05);
+}
+
+.playlists img {
+  margin-right: 10px;
+  border-radius: 4px;
+  transition: transform 0.3s ease;
+}
+
+.playlists li:hover img {
+  transform: scale(1.1);
+}
+
+.playlists span {
+  white-space: nowrap; /* Impide que el texto salte a la siguiente línea */
+  overflow: hidden; /* Oculta cualquier parte del texto que sobrepase el ancho del contenedor */
+  text-overflow: ellipsis; /* Reemplaza el texto que sobrepasa el ancho con puntos suspensivos */
+  max-width: 180px; /* Ajusta este valor según sea necesario */
+  display: inline-block;
+}
+
+.main-view {
+  grid-area: main-view;
+  background-color: #121212;
+  color: white;
+  padding: 20px;
+  height: 100%;
+  overflow-y: auto;
+}
+.no-playlist {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  font-size: 1.5em;
+  color: #b3b3b3;
+  text-align: center;
+}
+.playlist-header {
+  display: flex;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.playlist-header div {
+  max-width: calc(100% - 170px); /* Asegura que el texto no desborde la imagen */
+}
+
+.playlist-image {
+  width: 150px; /* Tamaño grande para la imagen de la playlist */
+  height: 150px;
+  margin-right: 20px;
+  border-radius: 8px;
+}
+
+.playlist-description {
+  color: #b3b3b3; /* Gris claro para diferenciar la descripción */
+  font-size: 1em;
+  margin-top: 10px;
+  white-space: pre-wrap; /* Preserva los saltos de línea y el formato original */
+}
+
+.track-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.track-table th, .track-table td {
+  padding: 10px;
+  text-align: left;
+  border-bottom: 1px solid #333;
+}
+
+.track-table th {
+  color: #b3b3b3;
+}
+
+.track-item:hover {
+  background-color: #3a3a3a; /* Cambia el color de hover a un gris más acorde */
+}
+
+.track-info {
+  display: flex;
+  align-items: center;
+}
+
+.track-image {
+  width: 60px;
+  height: 60px;
+  margin-right: 10px;
+  border-radius: 4px;
+}
+
+.track-name {
+  font-weight: bold;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 300px;
+  display: inline-block;
+}
+
+.track-artists {
+  color: #b3b3b3;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 200px;
+  display: inline-block;
+}
+
+.track-name a,
+.track-artists a,
+.track-info a,
+.track-item td a {
+  text-decoration: none; /* Sin subrayado por defecto */
+  color: inherit; /* Mantén el color original */
+}
+
+.track-name a:hover,
+.track-artists a:hover,
+.track-info a:hover,
+.track-item td a:hover {
+  text-decoration: underline; /* Subraya el enlace al pasar el cursor */
+}
+
+
+.song-info {
+  grid-area: song-info;
+  background-color: #181818;
+  color: white;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.song-image {
+  width: 100%;
+  max-width: 200px;
+  border-radius: 8px;
+  margin-bottom: 20px;
+}
+
+.song-info h2 {
+  margin: 10px 0;
+  font-size: 24px;
+}
+.song-info h3 {
+  margin: 5px 0;
+  font-size: 18px;
+  color: #b3b3b3;
+}
+
+.player {
+  grid-area: player;
+  background-color: #282828;
+  color: white;
+  padding: 10px;
+  text-align: center;
+  z-index: 2;
+}
+
+.search-view {
+  grid-area: main-view;
+  background-color: #121212;
+  color: white;
+  padding: 20px;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.search-input {
+  width: 100%;
+  padding: 10px;
+  border-radius: 4px;
+  border: none;
+  margin-bottom: 20px;
+  font-size: 16px;
+}
+
+.search-button {
+  padding: 10px 20px;
+  background-color: #1db954;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.search-button:hover {
+  background-color: #17a74a;
+}
+
+.search-filters {
+  margin-bottom: 20px;
+  display: flex;
+}
+
+.filter-button {
+  padding: 10px 20px;
+  margin-right: 10px;
+  background-color: #333;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.filter-button.active {
+  background-color: #1db954;
+}
+
+.filter-button:hover {
+  background-color: #555;
+}
+
+.search-results {
+  flex: 1; /* Permite que el contenedor de resultados ocupe todo el espacio disponible */
+  overflow-y: auto;
+  max-height: calc(100vh - 250px); /* Ajusta este valor según el tamaño del reproductor */
+  margin-bottom: 20px; /* Espacio adicional para evitar que el contenido toque el reproductor */
+}
+
+.search-results ul {
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+}
+
+.search-results li {
+  display: flex;
+  align-items: center;
+  margin-bottom: 10px;
+  padding: 10px;
+  border-radius: 4px;
+  transition: background-color 0.3s ease;
+}
+
+.search-results li:hover {
+  background-color: #3a3a3a;
+}
+
+.search-results img {
+  margin-right: 10px;
+  border-radius: 4px;
+  transition: transform 0.3s ease;
+}
+
+.search-results li:hover img {
+  transform: scale(1.1);
+}
